@@ -25,4 +25,8 @@ public class ProjectService {
     public Project findProjectByIdentifier(String projectId){
         return projectRepository.findByProjectIdentifier(projectId);
     }
+
+    public Iterable<Project> findAllProjects(){
+        return projectRepository.findAll();
+    }
 }
