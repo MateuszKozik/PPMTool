@@ -1,11 +1,15 @@
 package com.kozik.ppmtool.web;
 
+import javax.validation.Valid;
+
 import com.kozik.ppmtool.domain.Project;
+import com.kozik.ppmtool.services.MapValidationErrorService;
 import com.kozik.ppmtool.services.ProjectService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +22,15 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
+    @Autowired
+    private MapValidationErrorService mapValidationErrorService;
+
     @PostMapping("")
-    public ResponseEntity<Project> createNewProject(@RequestBody Project project){
+    public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result){
+
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if(errorMap!=null) return errorMap;
+
         Project project1 = projectService.saveOrUpdateProject(project);
         return new ResponseEntity<Project>(project1, HttpStatus.CREATED);
     }
