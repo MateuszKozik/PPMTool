@@ -3,6 +3,7 @@ package com.kozik.ppmtool.web;
 import javax.validation.Valid;
 
 import com.kozik.ppmtool.domain.Project;
+import com.kozik.ppmtool.exceptions.ProjectIdException;
 import com.kozik.ppmtool.services.MapValidationErrorService;
 import com.kozik.ppmtool.services.ProjectService;
 
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,5 +36,17 @@ public class ProjectController {
 
         Project project1 = projectService.saveOrUpdateProject(project);
         return new ResponseEntity<Project>(project1, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{projectId}")
+    public ResponseEntity<?> getProjectById(@PathVariable String projectId){
+
+        Project project = projectService.findProjectByIdentifier(projectId.toUpperCase());
+
+        if(project == null){
+            throw new ProjectIdException("Project ID '" + projectId.toUpperCase() + "' doesn't exist");
+        }
+
+        return new ResponseEntity<Project>(project, HttpStatus.OK);
     }
 }
