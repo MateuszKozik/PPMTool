@@ -38,8 +38,8 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-    getProject: PropTypes.func.isRequired,
-    project: PropTypes.object.isRequired
+    project: PropTypes.object.isRequired,
+    getProjects: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
