@@ -44,7 +44,7 @@ public class ProjectTask {
     private Date dueDate;
 
     @Column(updatable = false)
-    private Date projectIdentifier;
+    private String projectIdentifier;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(updatable = false)
