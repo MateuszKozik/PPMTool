@@ -26,7 +26,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message =  "Project name is required")
+    @NotBlank(message = "Project name is required")
     private String projectName;
 
     @NotBlank(message = "Project identifier is required")
@@ -44,18 +44,19 @@ public class Project {
     private Date end_date;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(updatable = false)
     private Date created_At;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updated_At;
 
     @PrePersist
-    protected void onCreate(){
+    protected void onCreate() {
         this.created_At = new Date();
     }
 
     @PreUpdate
-    protected void onUpdate(){
+    protected void onUpdate() {
         this.updated_At = new Date();
     }
 }
