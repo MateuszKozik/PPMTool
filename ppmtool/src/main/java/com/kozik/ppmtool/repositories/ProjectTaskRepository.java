@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProjectTaskRepository extends JpaRepository<ProjectTask, Long> {
     List<ProjectTask> findByProjectIdentifierOrderByPriority(String id);
+
+    ProjectTask findByProjectSequence(String sequence);
 }

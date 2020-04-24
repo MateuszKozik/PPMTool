@@ -38,4 +38,8 @@ public class ProjectTaskService {
     public Iterable<ProjectTask> findBacklogById(String backlog_id) {
         return projectTaskRepository.findByProjectIdentifierOrderByPriority(backlog_id);
     }
+
+    public ProjectTask findPTByProjectSequence(String backlog_id, String pt_id) {
+        return projectTaskRepository.findByProjectSequence(pt_id);
+    }
 }
