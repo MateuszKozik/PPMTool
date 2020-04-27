@@ -11,6 +11,7 @@ import UpdateProject from "./components/Project/UpdateProject";
 import ProjectBoard from "./components/ProjectBoard/ProjectBoard";
 import AddProjectTask from "./components/ProjectBoard/ProjectTasks/AddProjectTask";
 import UpdateProjectTask from "./components/ProjectBoard/ProjectTasks/UpdateProjectTask";
+import Landing from "./components/Layout/Landing";
 
 function App() {
     return (
@@ -18,6 +19,14 @@ function App() {
             <Router>
                 <div className="App">
                     <Header />
+                    {
+                        //Public Routes
+                    }
+
+                    <Route exact path="/" component={Landing} />
+                    {
+                        //Private Routes
+                    }
                     <Route exact path="/dashboard" component={Dashboard} />
                     <Route exact path="/addProject" component={AddProject} />
                     <Route
