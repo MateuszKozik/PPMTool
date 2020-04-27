@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
+import static com.kozik.ppmtool.security.SecurityConstants.SIGN_UP_URLS;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
@@ -21,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers("/", "**/*.png", "**/*.gid", "**/*.svg", "**/*.jpg", "**/*.html", "**/*.css", "**/*.js")
-                .permitAll().antMatchers("/api/users/**").permitAll().anyRequest().authenticated();
+                .permitAll().antMatchers(SIGN_UP_URLS).permitAll().anyRequest().authenticated();
     }
 
 }
